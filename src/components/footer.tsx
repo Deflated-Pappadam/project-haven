@@ -14,9 +14,15 @@ function Footer() {
       ©deflated pappadam
       </div>
       <div className='flex gap-5'>
-        <button className='m-auto border-black border-2 rounded-full'><Image src={twitter} alt="" className="w-10 p-2 " /></button>
-        <button className='m-auto border-black border-2 rounded-full'><Image src={discord} alt="" className="w-10 p-2 " /></button>
-        <button className='m-auto border-black border-2 rounded-full'><Image src={github} alt="" className="w-10 p-2 " /></button>
+        <a href='https://twitter.com/b21cs124544706' target='blank'>
+          <button className='m-auto border-black border-2 rounded-full'><Image src={twitter} alt="" className="w-10 p-2 " /></button>
+        </a>
+        <a href='https://discord.gg/MMcdP9fFmC' target='blank'>
+          <button className='m-auto border-black border-2 rounded-full'><Image src={discord} alt="" className="w-10 p-2 " /></button>
+        </a>
+        <a href='https://github.com/Deflated-Pappadam/project-haven' target='blank'>
+          <button className='m-auto border-black border-2 rounded-full'><Image src={github} alt="" className="w-10 p-2 " /></button>
+        </a>
       </div>
     </div>
   )

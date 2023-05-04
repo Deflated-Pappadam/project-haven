@@ -1,8 +1,8 @@
 import Image from "next/image";
-import Header from "@/components/header";
 import Footer from "@/components/footer";
 import logimage from "../assets/images/logimage.png";
 import Img64 from "../assets/images/64.png";
+
 import NftBox from "@/components/nftbox";
 import img1 from "../assets/images/64.png";
 import img2 from "../assets/images/65.png";
@@ -13,25 +13,109 @@ import img6 from "../assets/images/69.png";
 import img7 from "../assets/images/70.png";
 import img8 from "../assets/images/71.png";
 import img9 from "../assets/images/72.png";
+import { db } from "../firebase/firebase";
+import { useEffect, useState, useRef } from "react";
+import { addDoc, collection, getDocs } from "firebase/firestore";
+
 export default function Home() {
+  const LandingRef = useRef<any>(null);
+  const AboutUsRef = useRef<any>(null);
+  const CollectionRef = useRef<any>(null);
+  const OurGoalRef = useRef<any>(null);
+
+  const [donations, setDonations] = useState<any[] | null>(null);
+
+  const fetchDonations = async () => {
+    await getDocs(collection(db, "donations")).then((querySnapshot) => {
+      const newData = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setDonations(newData);
+      console.log(donations, newData);
+    });
+  };
+
+  useEffect(() => {
+    fetchDonations();
+  }, []);
   return (
     <div className=" w-full h-full m-0 p-0">
-      <Header />
+      <div className="text-black bg-[#C7FD90] flex items-center justify-between rounded-lg w-11/12 mx-auto p-5 mt-12 border-2 border-black">
+        <div className="font-medium text-2xl">
+          <Image
+                  src={Img64}
+                  alt=""
+                  className="w-[90%] rounded-lg m-8 border-4 border-[black ]object-cover"
+                /></div>
+        <div className="flex gap-10 text-xl m-auto">
+          <a
+            onClick={() => {
+              LandingRef?.current?.scrollIntoView({
+                block: "start",
+                behavior: "smooth",
+              });
+            }}
+          >
+            <div>Home</div>
+          </a>
+          <a
+            onClick={() => {
+              OurGoalRef?.current?.scrollIntoView({
+                block: "start",
+                behavior: "smooth",
+              });
+            }}
+          >
+            <div>About Us</div>
+          </a>
+          <a
+            onClick={() => {
+              AboutUsRef?.current?.scrollIntoView({
+                block: "start",
+                behavior: "smooth",
+              });
+            }}
+          >
+            <div>Walkthrough</div>
+          </a>
+          <a
+            onClick={() => {
+              CollectionRef?.current?.scrollIntoView({
+                block: "start",
+                behavior: "smooth",
+              });
+            }}
+          >
+            <div>Collections</div>
+          </a>
+        </div>
+        <div className="">
+          <button className="text-white font-medium border-black border-2 px-10 py-5 rounded-3xl text-lg bg-black">
+            Contribute
+          </button>
+        </div>
+      </div>
       <div className="">
-        <div id="landing" className=" bg-[#E7E8DE] w-11/12 m-auto border-b-2 border-black">
+        <div
+          id="landing"
+          ref={LandingRef}
+          className=" bg-[#E7E8DE] w-11/12 m-auto border-b-2 border-black"
+        >
           <div className="flex">
             <div className="m-10 w-[50%] ">
               <h1 className="text-[70px] font-bold text-black leading-[80px]">
-                Catch Phrase by rhon
+                Guess what? it is never too late
               </h1>
               <p className="text-black font-medium my-10 text-xl">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam,
-                explicabo. Est illo corporis veniam assumenda nulla, illum
-                itaque aspernatur cumque laudantium quidem quos commodi alias
-                iste dolorum quis, voluptatibus natus?
+                <b>Haven initiative</b> is our answer to a millenia old
+                fundraising system that is still in practice. Our project is
+                specifically aimed at providing sustence and consistency to
+                organzations who strive towards the goal of attaining complete
+                mental health awarness and well being.
               </p>
               <button className="w-36 h-12 bg-black text-white shadow-[#C7FD90] font-semibold text-xl px-3 border-[1px] m-2  border-black   hover:shadow-none shadow-[4px_4px_0px_rgb(0,0,0)]  hover:translate-y-0 -translate-y-1 hover:translate-x-0 -translate-x-1 transition-all">
-                ButTon
+                Know more
               </button>
             </div>
             <div className="flex gap-9">
@@ -57,7 +141,11 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div id="about" className="flex w-11/12 bg-[#E7E8DE] mx-auto  ">
+        <div
+          id="about"
+          ref={OurGoalRef}
+          className="flex w-11/12 bg-[#E7E8DE] mx-auto  "
+        >
           <div className="flex w-full my-10 g-10 border-b-2 border-black  ">
             <div className="w-[50%] flex items-center justify-center">
               <div className="justify-center relative h-[400px] w-[400px] bg-orange-300 shadow-[6px_6px_0px_rgb(0,0,0)] ">
@@ -68,12 +156,22 @@ export default function Home() {
               <h1 className="font-bold text-6xl">Our Goal</h1>
               <section className="w-[400px]">
                 <div className="w-full shadow-[0px_0px_3px_rgb(0,0,0)] h-4 mb-4 bg-gray-200 rounded-full mt-7">
-                  <div className="h-4 bg-[#8adb37] rounded-full w-[45%]"></div>
+                  <div
+                    className={`h-4 bg-[#8adb37] rounded-full w-[${donations?.length!}%]`}
+                  ></div>
                 </div>
-                
+
                 <div className="flex justify-between">
-                  <p>raised <span className="font-bold">₹10,000,000</span></p>
-                  <p>target <span className="font-bold text-[#8adb37]">₹10,000,000</span></p>
+                  <p>
+                    raised{" "}
+                    <span className="font-bold">
+                      ₹{(donations?.length! * 100000) / 100}
+                    </span>
+                  </p>
+                  <p>
+                    target{" "}
+                    <span className="font-bold text-[#8adb37]">₹1,00,000</span>
+                  </p>
                 </div>
               </section>
               <section>
@@ -83,17 +181,13 @@ export default function Home() {
                       <dt className="mb-2 text-3xl md:text-4xl font-extrabold">
                         73M+
                       </dt>
-                      <dd className="font-light text-gray-500">
-                        developers
-                      </dd>
+                      <dd className="font-light text-gray-500">developers</dd>
                     </div>
                     <div className="flex flex-col items-center justify-center">
                       <dt className="mb-2 text-3xl md:text-4xl text-[#8adb37] font-extrabold">
                         1B+
                       </dt>
-                      <dd className="font-light text-gray-500">
-                        contributors
-                      </dd>
+                      <dd className="font-light text-gray-500">contributors</dd>
                     </div>
                     <div className="flex flex-col items-center justify-center">
                       <dt className="mb-2 text-3xl md:text-4xl font-extrabold">
@@ -109,22 +203,33 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <section className="w-11/12 bg-[#E7E8DE] mx-auto">
+        <section
+          id="aboutus"
+          ref={AboutUsRef}
+          className="w-11/12 bg-[#E7E8DE] mx-auto"
+        >
           <div className="  gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
             <div className="font-light text-gray-500 sm:text-lg ">
               <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 ">
-                We didn't reinvent the wheel
+                What is this all about?
               </h2>
               <p className="mb-4">
-                We are strategists, designers and developers. Innovators and
-                problem solvers. Small enough to be simple and quick, but big
-                enough to deliver the scope you want at the pace you need. Small
-                enough to be simple and quick, but big enough to deliver the
-                scope you want at the pace you need.
+                <b>The Haven Initiative</b> is necessarily a donation-initiative
+                that we have come up with, which ensures that every party
+                concerned gets maxium benefit out of it. Contrary to the normy
+                fundraisers/donation drives, we provide a blockchain-based
+                system by incorporating NFTs, which gives the donors a chance to
+                <b> profit off of it</b> at some point off of it. The
+                reselling/rotation of this NFTs ensures that the initial
+                investments made does not get <b>single ended</b>,thus leading
+                to a state of sustenance and self sufficiency.
               </p>
               <p>
-                We are strategists, designers and developers. Innovators and
-                problem solvers. Small enough to be simple and quick.
+                We believe that this perspective in terms of
+                fundraisers/donation platforms totally tranforms such
+                initiatives into a totally different level where it becomes more
+                about <b>mutual benefit</b> and development, rather than just
+                about doing a <b>good deed</b>
               </p>
             </div>
             <div className="grid grid-cols-2 gap-4 mt-8">
@@ -141,19 +246,23 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <div id="collections" className="w-11/12 bg-[#E7E8DE] mx-auto">
+        <div
+          id="collections"
+          ref={CollectionRef}
+          className="w-11/12 bg-[#E7E8DE] mx-auto"
+        >
           <div className=" m-auto">
             <h1 className="text-black font-bold text-[70px] text-center m-auto">
-              Cool name for collections
+              The Mind Matters Collection
             </h1>
             <div className=" flex justify-evenly m-auto w-[80%]  items-center flex-wrap">
-              <NftBox name="Twinkle Toes" img={img2} rarity="Basic" />
-              <NftBox name="Twinkle Toes" img={img3} rarity="Basic" />
-              <NftBox name="Twinkle Toes" img={img6} rarity="Basic" />
-              <NftBox name="Twinkle Toes" img={img4} rarity="Basic" />
-              <NftBox name="Twinkle Toes" img={img5} rarity="Basic" />
-              <NftBox name="Twinkle Toes" img={img7} rarity="Basic" />
-              <NftBox name="Twinkle Toes" img={img8} rarity="Basic" />
+              <NftBox name="Imagined Inlet" img={img2} rarity="Basic" />
+              <NftBox name="Otherwordly Oasis" img={img3} rarity="Basic" />
+              <NftBox name="Rainbow Riverbank" img={img6} rarity="Golden" />
+              <NftBox name="Nebula Nesting" img={img4} rarity="Legendary" />
+              <NftBox name="Chromatic Coastline" img={img5} rarity="Basic" />
+              <NftBox name="Transcendent Trail" img={img7} rarity="Basic" />
+              <NftBox name="Fabled Fields" img={img8} rarity="Basic" />
             </div>
           </div>
         </div>
