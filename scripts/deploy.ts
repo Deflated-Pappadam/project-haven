@@ -3,7 +3,7 @@ import {ethers} from "hardhat";
 
 async function main() {
 	const Haven = await ethers.getContractFactory("Haven");
-	const haven = await Haven.deploy(100, "ipfs:///");
+	const haven = await Haven.deploy(100, "ipfs://QmTwXuFkWdqgsXWTyHbcR9Bs2bpcrLxV1LEvqaVYYq9f11/");
 
 	await haven.deployed();
 	console.log("Haven Deployed To:", haven.address);
