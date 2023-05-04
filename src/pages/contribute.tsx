@@ -1,14 +1,8 @@
 import { BigNumber, ethers } from "ethers";
 import Image from "next/image";
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
-import Stray from "../../artifacts/contracts/Haven.sol/Haven.json";
-import logo from "../../assets/logo.png";
-import p1 from "../../../public/nfts/4.png";
-import p2 from "../../../public/nfts/65.png";
-import p3 from "../../../public/nfts/43.png";
-import logo1 from "../../assets/logo.png";
-import logo2 from "../../assets/logo.png";
-import logo3 from "../../assets/logo.png";
+import Haven from "../artifacts/contracts/Haven.sol/Haven.json";
+
 
 export default function Contribute() {
     const [totalMinted, setTotalMinted] = useState(0);
@@ -25,7 +19,7 @@ export default function Contribute() {
 
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const contractAddress = "0x03a9546E96621ABcb1712AeC94b4c545BCAf0037";
+    const contractAddress = "0xc83E8f083BB3B0c070556A79BD043cE756D1934b";
 
     const onAmountChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = !Number.isNaN(e.target.valueAsNumber)
@@ -51,7 +45,7 @@ export default function Contribute() {
             const signer = provider?.getSigner();
             const contract = new ethers.Contract(
                 contractAddress,
-                Stray.abi,
+                Haven.abi,
                 signer
             );
             try {
@@ -68,6 +62,7 @@ export default function Contribute() {
                     }
                 );
                 await response.wait();
+
                 setIsProcessing(false);
                 setshowThankyouMsg(true);
                 console.log("response:", response);
@@ -93,11 +88,8 @@ export default function Contribute() {
             >
                 <div className="flex  flex-row items-center justify-between ">
                     <div className="flex flex-row items-center justify-start">
-                        <div className="w-20">
-                            <Image src={logo} alt="" className=" " />
-                        </div>
                         <div className="text-lg text-black font-semibold">
-                            Shelter
+                            Haven
                         </div>
                     </div>
                     <div className="mr-20">
@@ -143,61 +135,9 @@ export default function Contribute() {
             <div className=" -mt-[10%] w-full border-black border-2 bg-slate-200 ">
                 <div className="h-screen  flex  flex-col items-center justify-center">
                     <div className=" ">
-                        <div className=" justify-end items-end  w-[50%]">
-                            <div className=" absolute w-40  top-[70%] left-[5%] shadow-red-500   shadow-[8px_8px_0px_rgb(0,0,0)] translate-y-1 translate-x-1 transition-all  ">
-                                <Image src={p1} alt="" />
-                            </div>
-
-                            <div className=" absolute w-20  top-[55%] left-[5%]  rounded-xl ">
-                                <Image src={logo1} alt="" />
-                            </div>
-
-                            <div className="  absolute w-40  top-[50%] left-[12%] shadow-red-500  shadow-[8px_8px_0px_rgb(0,0,0)] translate-y-1 translate-x-1 transition-all">
-                                <Image src={p2} alt="" />
-                            </div>
-
-                            <div className=" absolute w-20  top-[55%] left-[25%] rounded-xl ">
-                                <Image src={logo2} alt="" />
-                            </div>
-
-                            <div className="  absolute w-40 top-[70%] left-[20%] shadow-red-500 shadow-[8px_8px_0px_rgb(0,0,0)] translate-y-1 translate-x-1 transition-all ">
-                                <Image src={p3} alt="" />
-                            </div>
-
-                            <div className=" absolute w-20  top-[75%] left-[15%]  rounded-xl ">
-                                <Image src={logo3} alt="" />
-                            </div>
-                        </div>
                     </div>
-
                     <div>
-                        <div className=" justify-end items-end  w-[50%]">
-                            <div className=" absolute w-40  top-[30%] left-[70%] shadow-red-500   shadow-[8px_8px_0px_rgb(0,0,0)] translate-y-1 translate-x-1 transition-all  ">
-                                <Image src={p1} alt="" />
-                            </div>
-
-                            <div className=" absolute w-20  top-[15%] left-[70%]  rounded-xl ">
-                                <Image src={logo1} alt="" />
-                            </div>
-
-                            <div className="  absolute w-40  top-[10%] left-[77%] shadow-red-500  shadow-[8px_8px_0px_rgb(0,0,0)] translate-y-1 translate-x-1 transition-all">
-                                <Image src={p2} alt="" />
-                            </div>
-
-                            <div className=" absolute w-20  top-[15%] left-[90%] rounded-xl ">
-                                <Image src={logo2} alt="" />
-                            </div>
-
-                            <div className="  absolute w-40 top-[30%] left-[85%] shadow-red-500 shadow-[8px_8px_0px_rgb(0,0,0)] translate-y-1 translate-x-1 transition-all ">
-                                <Image src={p3} alt="" />
-                            </div>
-
-                            <div className=" absolute w-20  top-[35%] left-[80%]  rounded-xl ">
-                                <Image src={logo3} alt="" />
-                            </div>
-                        </div>
                     </div>
-
                     {!showThankyouMsg ? (
                         <div className="mt-[10%] bg-white w-4/12  text-black rounded-lg p-5">
                             <h2 className="font-semibold">Currency</h2>
@@ -268,15 +208,13 @@ export default function Contribute() {
                                 Thank You! 🎉
                             </h2>
                             <p>
-                                Thank you for your donation towards Project
-                                Shelter.
+                                A huge thank you for supporting our initiative, Project Haven.
                             </p>
                             <p>
-                                As a token of our appreciation, we would like to
-                                send you {Math.floor(amount! / 100)} Stray NFTs
-                                as a thank you for your support.
+                                We would like to extend our token of appreciation for such a generous contribution. To reciprocate your kindness, you
+                                have been rewarded {Math.floor(amount! / 100)} NFTs which belong to the Mind Matters Collection.
                             </p>
-                            <p>You can view your NFTs <a className="text-red-500 underline font-bold" href="https://testnets.opensea.io/collection/project-shelter">here</a></p>
+                            <p>Head over to <a className="text-red-500 underline font-bold" href="https://testnets.opensea.io/collection/tmmc?search[sortAscending]=false&search[sortBy]=CREATED_DATE">OpenSea.io</a> to check it out</p>
                             <button
                                 onClick={() => setshowThankyouMsg(false)}
                                 className="p-1 px-4 mt-5 border-4 rounded-lg font-semibold text-red-500 border-red-500 hover:bg-red-500 hover:text-white"
