@@ -65,11 +65,11 @@ function Haven() {
             </a>
           </div>
           <div>
-            <a href="/contribute">
+            <Link href="/contribute">
               <button className="text-white font-medium border-black border-2 px-10 py-4 rounded-3xl text-lg bg-black">
                 Contribute
               </button>
-            </a>
+            </Link>
           </div>
         </nav>
         <div id="about us" ref={aboutUsRef} className="w-11/12 mx-auto">
