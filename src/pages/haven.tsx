@@ -9,6 +9,8 @@ import { Doughnut } from "react-chartjs-2";
 import { useEffect, useState, useRef } from "react";
 import logo from "../assets/logo.png";
 import Link from "next/link";
+import inner from "../assets/inner.svg"
+import outer from "../assets/outer.svg"
 
 const data = {
   labels: ["Red", "Green", "Blue"],
@@ -91,6 +93,10 @@ function Haven() {
                 <b>psychiatrist</b>. which potentially leads to a scenario that
                 could leave them scarred for the rest of their life.
               </p>
+            </div>
+            <div className=" w-[70%] scale-150 flex items-center justify-center">
+              <Image src={inner} alt="" className="relative  animate-[spin_8000ms_infinite]"/>
+              <Image src={outer} alt="" className="absolute animate-[spin_5000ms_backwards_infinite]"/>
             </div>
           </div>
         </div>
