@@ -1,10 +1,5 @@
-import Image from "next/image";
-import Footer from "@/components/footer";
-import logimage from "../assets/images/logimage.png";
-import Img64 from "../assets/images/64.png";
-
-import NftBox from "@/components/nftbox";
-import img1 from "../assets/images/64.png";
+import React, { useEffect, useState, useRef, MouseEventHandler } from "react";
+import logo from "../assets/logo.png";
 import img2 from "../assets/images/65.png";
 import img3 from "../assets/images/66.png";
 import img4 from "../assets/images/67.png";
@@ -12,18 +7,23 @@ import img5 from "../assets/images/68.png";
 import img6 from "../assets/images/69.png";
 import img7 from "../assets/images/70.png";
 import img8 from "../assets/images/71.png";
-import img9 from "../assets/images/72.png";
-import { db } from "../firebase/firebase";
-import { useEffect, useState, useRef } from "react";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import Image from "next/image";
+import Marquee from "react-fast-marquee";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/firebase/firebase";
+import twitter from "../assets/twitter.svg";
+import discord from "../assets/discord.svg";
+import github from "../assets/github.svg";
+import NftBox from "@/components/nftbox";
+
 
 export default function Home() {
-  const LandingRef = useRef<any>(null);
-  const AboutUsRef = useRef<any>(null);
-  const CollectionRef = useRef<any>(null);
-  const OurGoalRef = useRef<any>(null);
-
   const [donations, setDonations] = useState<any[] | null>(null);
+  const homeRef = useRef<any>(null);
+  const aboutUsRef = useRef<any>(null);
+  const goalRef = useRef<any>(null);
+  const collectionRef = useRef<any>(null);
+  const contactUsRef = useRef<any>(null);
 
   const fetchDonations = async () => {
     await getDocs(collection(db, "donations")).then((querySnapshot) => {
@@ -32,242 +32,333 @@ export default function Home() {
         id: doc.id,
       }));
       setDonations(newData);
-      console.log(donations, newData);
+    });
+  };
+
+  const handleScroll = (ref: any) => {
+    ref?.current?.scrollIntoView({
+      block: "start",
+      behavior: "smooth",
     });
   };
 
   useEffect(() => {
-    fetchDonations();
+    (async () => {
+      fetchDonations();
+    })();
   }, []);
+  
   return (
-    <div className=" w-full h-full m-0 p-0">
-      <div className="text-black bg-[#C7FD90] flex items-center justify-between rounded-lg w-11/12 mx-auto p-5 mt-12 border-2 border-black">
-        <div className="font-medium text-2xl">
-          <Image
-                  src={Img64}
-                  alt=""
-                  className="w-[90%] rounded-lg m-8 border-4 border-[black ]object-cover"
-                /></div>
-        <div className="flex gap-10 text-xl m-auto">
-          <a
-            onClick={() => {
-              LandingRef?.current?.scrollIntoView({
-                block: "start",
-                behavior: "smooth",
-              });
-            }}
-          >
-            <div>Home</div>
-          </a>
-          <a
-            onClick={() => {
-              OurGoalRef?.current?.scrollIntoView({
-                block: "start",
-                behavior: "smooth",
-              });
-            }}
-          >
-            <div>About Us</div>
-          </a>
-          <a
-            onClick={() => {
-              AboutUsRef?.current?.scrollIntoView({
-                block: "start",
-                behavior: "smooth",
-              });
-            }}
-          >
-            <div>Walkthrough</div>
-          </a>
-          <a
-            onClick={() => {
-              CollectionRef?.current?.scrollIntoView({
-                block: "start",
-                behavior: "smooth",
-              });
-            }}
-          >
-            <div>Collections</div>
-          </a>
-        </div>
-        <div className="">
-          <button className="text-white font-medium border-black border-2 px-10 py-5 rounded-3xl text-lg bg-black">
-            Contribute
-          </button>
-        </div>
-      </div>
-      <div className="">
-        <div
-          id="landing"
-          ref={LandingRef}
-          className=" bg-[#E7E8DE] w-11/12 m-auto border-b-2 border-black"
-        >
-          <div className="flex">
-            <div className="m-10 w-[50%] ">
-              <h1 className="text-[70px] font-bold text-black leading-[80px]">
-                Guess what? it is never too late
-              </h1>
-              <p className="text-black font-medium my-10 text-xl">
-                <b>Haven initiative</b> is our answer to a millenia old
-                fundraising system that is still in practice. Our project is
-                specifically aimed at providing sustence and consistency to
-                organzations who strive towards the goal of attaining complete
-                mental health awarness and well being.
-              </p>
-              <button className="w-36 h-12 bg-black text-white shadow-[#C7FD90] font-semibold text-xl px-3 border-[1px] m-2  border-black   hover:shadow-none shadow-[4px_4px_0px_rgb(0,0,0)]  hover:translate-y-0 -translate-y-1 hover:translate-x-0 -translate-x-1 transition-all">
-                Know more
+    <div  className="w-screen h-full flex flex-col">
+      <div className="h-screen relative m-5 bg-gradient-to-br from-[#7E83BD] to-blue-100 rounded-3xl">
+        <nav id="nav" className=" flex text-black justify-between p-4">
+          <div className="flex items-center">
+            <Image src={logo} alt="" className="w-14 h-14" />
+            <div className="text-[#C7FD90]  text-lg my-auto">Haven</div>
+          </div>
+          <div className="z-40 flex items-center text-md font-semibold bg-white px-10 rounded-full gap-5">
+            <div
+              className="hover:animate-pulse cursor-pointer"
+              onClick={() => {
+                handleScroll(homeRef);
+              }}
+            >
+              Home
+            </div>
+            <div
+              className="hover:animate-pulse cursor-pointer"
+              onClick={() => {
+                handleScroll(goalRef);
+              }}
+            >
+              Info
+            </div>
+            <a
+              className="hover:animate-pulse cursor-pointer"
+              onClick={() => {
+                handleScroll(aboutUsRef);
+              }}
+            >
+              About Us
+            </a>
+            <a
+              className="hover:animate-pulse cursor-pointer"
+              onClick={() => {
+                handleScroll(collectionRef);
+              }}
+            >
+              Collections
+            </a>
+            <a
+              className="hover:animate-pulse cursor-pointer"
+              onClick={() => {
+                handleScroll(contactUsRef);
+              }}
+            >
+              Contact Us
+            </a>
+          </div>
+          <div>
+            <a href="/contribute">
+              <button className="text-white font-medium border-black border-2 px-10 py-4 rounded-3xl text-lg bg-black">
+                Contribute
               </button>
-            </div>
-            <div className="flex gap-9">
-              <div className="m-10">
-                <Image
-                  src={Img64}
-                  alt=""
-                  className="w-[90%] rounded-lg m-8 border-4 border-[black ]object-cover"
-                />
-              </div>
-              <div className="flex flex-col gap-9">
-                <Image
-                  src={Img64}
-                  alt=""
-                  className="w-[50%] border-4 border-black m-8 rounded-lg"
-                />
-                <Image
-                  src={Img64}
-                  alt=""
-                  className="w-[50%]  border-4 border-black my-8  rounded-lg"
-                />
-              </div>
-            </div>
+            </a>
           </div>
-        </div>
-        <div
-          id="about"
-          ref={OurGoalRef}
-          className="flex w-11/12 bg-[#E7E8DE] mx-auto  "
-        >
-          <div className="flex w-full my-10 g-10 border-b-2 border-black  ">
-            <div className="w-[50%] flex items-center justify-center">
-              <div className="justify-center relative h-[400px] w-[400px] bg-orange-300 shadow-[6px_6px_0px_rgb(0,0,0)] ">
-                <Image src={logimage} alt="" className="scale-[150%]" />
-              </div>
-            </div>
-            <div className="flex items-center text-black w-full flex-col">
-              <h1 className="font-bold text-6xl">Our Goal</h1>
-              <section className="w-[400px]">
-                <div className="w-full shadow-[0px_0px_3px_rgb(0,0,0)] h-4 mb-4 bg-gray-200 rounded-full mt-7">
-                  <div
-                    className={`h-4 bg-[#8adb37] rounded-full w-[${donations?.length!}%]`}
-                  ></div>
-                </div>
+        </nav>
+        <div ref={homeRef} className="absolute h-full w-full text-white top-0 flex justify-between">
+          <div className="flex flex-col px-8 pb-20 w-[50%] justify-end">
+            <h1 className="text-8xl font-semibold">Guess what? <br></br><span className="text-8xl font-normal">it's never too late</span> </h1>
+           
+            <hr className="h-[3px] bg-white my-7" />
+            <p className="text-xl"> The Haven initiative is our answer to a millenia old fundraising
+                system that is still in practice. Our project is specifically
+                aimed at providing sustence and consistency to organzations who
+                strive towards the goal of attaining complete mental health
+                awarness and well being.</p>
+          </div>
+          <div className="flex items-center  justify-center w-[40%] h-full ">
+            <Image src={img8} alt="" className="rounded-lg w-[60%]" />
+          </div>
 
-                <div className="flex justify-between">
-                  <p>
-                    raised{" "}
-                    <span className="font-bold">
-                      ₹{(donations?.length! * 100000) / 100}
-                    </span>
-                  </p>
-                  <p>
-                    target{" "}
-                    <span className="font-bold text-[#8adb37]">₹1,00,000</span>
-                  </p>
-                </div>
-              </section>
-              <section>
-                <div className="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-16 lg:px-6">
-                  <dl className="grid max-w-screen-md gap-8 mx-auto text-black sm:grid-cols-3">
-                    <div className="flex flex-col items-center justify-center">
-                      <dt className="mb-2 text-3xl md:text-4xl font-extrabold">
-                        73M+
-                      </dt>
-                      <dd className="font-light text-gray-500">developers</dd>
-                    </div>
-                    <div className="flex flex-col items-center justify-center">
-                      <dt className="mb-2 text-3xl md:text-4xl text-[#8adb37] font-extrabold">
-                        1B+
-                      </dt>
-                      <dd className="font-light text-gray-500">contributors</dd>
-                    </div>
-                    <div className="flex flex-col items-center justify-center">
-                      <dt className="mb-2 text-3xl md:text-4xl font-extrabold">
-                        4M+
-                      </dt>
-                      <dd className="font-light text-gray-500">
-                        organizations
-                      </dd>
-                    </div>
-                  </dl>
-                </div>
-              </section>
-            </div>
-          </div>
-        </div>
-        <section
-          id="aboutus"
-          ref={AboutUsRef}
-          className="w-11/12 bg-[#E7E8DE] mx-auto"
-        >
-          <div className="  gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
-            <div className="font-light text-gray-500 sm:text-lg ">
-              <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 ">
-                What is this all about?
-              </h2>
-              <p className="mb-4">
-                <b>The Haven Initiative</b> is necessarily a donation-initiative
-                that we have come up with, which ensures that every party
-                concerned gets maxium benefit out of it. Contrary to the normy
-                fundraisers/donation drives, we provide a blockchain-based
-                system by incorporating NFTs, which gives the donors a chance to
-                <b> profit off of it</b> at some point off of it. The
-                reselling/rotation of this NFTs ensures that the initial
-                investments made does not get <b>single ended</b>,thus leading
-                to a state of sustenance and self sufficiency.
-              </p>
-              <p>
-                We believe that this perspective in terms of
-                fundraisers/donation platforms totally tranforms such
-                initiatives into a totally different level where it becomes more
-                about <b>mutual benefit</b> and development, rather than just
-                about doing a <b>good deed</b>
-              </p>
-            </div>
-            <div className="grid grid-cols-2 gap-4 mt-8">
-              <Image
-                className="w-full rounded-lg"
-                src={img9}
-                alt="office content 1"
-              />
-              <Image
-                className="mt-4 w-full lg:mt-10 rounded-lg"
-                src={img8}
-                alt="office content 2"
-              />
-            </div>
-          </div>
-        </section>
-        <div
-          id="collections"
-          ref={CollectionRef}
-          className="w-11/12 bg-[#E7E8DE] mx-auto"
-        >
-          <div className=" m-auto">
-            <h1 className="text-black font-bold text-[70px] text-center m-auto">
-              The Mind Matters Collection
-            </h1>
-            <div className=" flex justify-evenly m-auto w-[80%]  items-center flex-wrap">
-              <NftBox name="Imagined Inlet" img={img2} rarity="Basic" />
-              <NftBox name="Otherwordly Oasis" img={img3} rarity="Basic" />
-              <NftBox name="Rainbow Riverbank" img={img6} rarity="Golden" />
-              <NftBox name="Nebula Nesting" img={img4} rarity="Legendary" />
-              <NftBox name="Chromatic Coastline" img={img5} rarity="Basic" />
-              <NftBox name="Transcendent Trail" img={img7} rarity="Basic" />
-              <NftBox name="Fabled Fields" img={img8} rarity="Basic" />
-            </div>
-          </div>
+
         </div>
       </div>
-      <Footer />
+      <Marquee
+        ref={goalRef}
+        className="mb-7 h-[11rem] text-9xl overflow-hidden text-blue-400 font-semibold"
+      >
+        Streamlined donation platform | Integration of blockchain+web3 |
+        Multi-ended donations | Sustainable development model |
+      </Marquee>
+      <section className="p-10 h-min-[900px]  flex flex-col text-black justify-between">
+        
+        <div>
+        <p className="text-gray-600 font-semibold text-lg py-10">01 - General Info</p>
+          <h1 className="text-gray-600 text-4xl">
+            <b>Haven initiative</b> is the highly advanced fundraiser medium of{" "}
+            <b>Project Haven</b>
+          </h1>
+          <div className="flex gap-9 mt-12">
+            <div className="relative w-full h-[300px] bg-red-200 rounded-md">
+              <div className="flex h-full flex-col justify-between p-10">
+                <h1 className="font-bold text-xl">Seamless Transaction</h1>
+                <p className="font-semibold">
+                  Every transaction is carried out in the mumbai{" "}
+                  <b>polygonscans</b> network by integrating the aspects of
+                  blockchain and web3
+                </p>
+              </div>
+            </div>
+            <div className="relative w-full h-[300px] bg-blue-200 rounded-md">
+              <div className="flex h-full flex-col justify-between p-10">
+                <h1 className="font-bold text-xl">
+                  Mutually beneficial system
+                </h1>
+                <p className="font-semibold">
+                  The Haven initiative guarantees both the donor and the donee
+                  an opportunity to gain maximum benefit off of a donation,
+                  irrespective of the conventional methods
+                </p>
+              </div>
+            </div>
+            <div className="relative w-full h-[300px] bg-green-200 rounded-md">
+              <div className="flex h-full flex-col justify-between p-10">
+                <h1 className="font-bold text-xl">
+                  Self-sustained development model
+                </h1>
+                <p className="font-semibold">
+                  10% of the transaction charges of the NFTs belonging to the{" "}
+                  <b>Mind Matter's Collection</b> is claimed by Project Haven,
+                  which paves way for a donation cycle, instead of a path
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section ref={aboutUsRef} className="p-10 h-min-[700px] ">
+      <p className="text-gray-600 font-semibold text-lg">02 - About Us</p>
+        <div className="flex items-center justify-between">
+          <h1 className="text-black font-bold text-6xl">
+            The Haven Initiative
+          </h1>
+          <a href="/contribute">
+            <button className="text-black font-medium my-10 px-4 py-2 rounded-3xl text-lg bg-gray-300 hover:bg-black hover:text-white transition-all duration-300">
+              Contribute
+            </button>
+          </a>
+        </div>
+        <hr className="h-5 border-gray-400 my-3 bg-transparent  border-t-2" />
+        <div className="flex h-full py-28">
+          <div className="w-[100%] border-gray-400 border-r-2">
+            <p className="text-black text-lg w-[60%]">
+              Our medium stands to serve as a intermediary between the willing
+              donors and <b>Project Haven</b>. By integrating the scopes of
+              blockchain and web3, <b>Haven intiative</b> blows the current
+              donation situation out of the park by bringing in the NFT cycle
+              and royalty charge system. <b>Project Haven</b> is an initiative
+              put together by like minded individuals to propogate the
+              importance of being the helpful hand when someone is subjected to
+              immense mental stress or issues that affect their well-being
+            </p>
+            <a href="/haven">
+              <button className="text-black font-medium my-10 px-4 py-2 rounded-3xl text-lg bg-gray-300 hover:bg-black hover:text-white transition-all duration-300">
+                Learn more about Project Haven
+              </button>
+            </a>
+          </div>
+
+          <div className="flex w-[100%] items-center text-black flex-col justify-center ">
+            <h1 className="font-bold text-6xl">Our Goal</h1>
+            <section className="w-[400px]">
+              <div className="w-full shadow-[0px_0px_3px_rgb(0,0,0)] h-6 m-2 bg-gray-200 rounded-full mt-7">
+                <div
+                  className={`h-6 bg-[#8adb37] rounded-full w-[${donations?.length!}%]`}
+                ></div>
+              </div>
+
+              <div className="flex justify-between">
+                <p>
+                  raised{" "}
+                  <span className="font-bold">
+                    ₹{(donations?.length! * 100000) / 100}
+                  </span>
+                </p>
+                <p>
+                  target{" "}
+                  <span className="font-bold text-[#8adb37]">₹1,00,000</span>
+                </p>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      {/* COLLECTION */}
+      <section
+        ref={collectionRef}
+        className="p-10 h-full text-white bg-gradient-to-b from-black to-neutral-800 border-black rounded-b-xl overflow-hidden"
+      >
+        <p className="text-gray-500 font-semibold text-lg">
+          03 - Our Collection
+        </p>
+        <h1 className="font-bold text-6xl mb-6">
+          The Mind Matter's Collection
+        </h1>
+        <div className=" flex m-auto w-full justify-center items-center flex-wrap">
+          <NftBox name="Imagined Inlet" img={img2} rarity="Basic" />
+          <NftBox name="Otherwordly Oasis" img={img3} rarity="Basic" />
+          <NftBox name="Rainbow Riverbank" img={img6} rarity="Golden" />
+          <NftBox name="Nebula Nesting" img={img4} rarity="Legendary" />
+        </div>
+        <div className="w-full flex justify-end">
+          <a
+            href="https://testnets.opensea.io/collection/tmmc?search[sortAscending]=false&search[sortBy]=CREATED_DATE"
+            target="blank"
+          >
+            <button className="text-black font-medium m-20 px-4 py-2 rounded-3xl text-lg bg-gray-300 hover:bg-white hover:text-black transition-all duration-1000">
+              View More
+            </button>
+          </a>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer ref={contactUsRef} className="w-full min-h-[300px] -mt-5 bg-[#C9D0D5] p-10">
+        <div className="flex justify-between">
+          <div>
+            <div className="m-4 text-6xl text-black font-semibold">
+              We would love to hear from you
+            </div>
+            <div className="m-4 text-3xl text-gray-500">
+              Any kind of remarks is appreciated
+            </div>
+            <div className="m-4 text-2xl text-gray-500">
+              Feel free to hit us up with suggestions
+            </div>
+            <a href="/contribute">
+              <button className=" m-4 text-black font-medium my-10 px-4 py-2 rounded-3xl text-lg bg-white hover:bg-black hover:text-white transition-all duration-1000">
+                Contribute -&gt;
+              </button>
+            </a>
+          </div>
+          <div className="mt-10">
+            <div className="text-xl text-black font-semibold">Contact Us</div>
+            <div className="text-lg text-gray-500 hover:text-black cursor-pointer transition-all duration-600">
+              Our Email{" "}
+            </div>
+            <div className="text-lg text-gray-500 hover:text-black cursor-pointer transition-all duration-600">
+              Our Phone
+            </div>
+            <div className="text-lg text-gray-500 hover:text-black cursor-pointer transition-all duration-600">
+              Address maybe
+            </div>
+          </div>
+          <div className="mt-10">
+            <div className="text-xl text-black font-semibold hover:text-black cursor-pointer transition-all duration-600">
+              Follow Us
+            </div>
+            <a href="https://twitter.com/b21cs124544706" target="blank">
+              <div className="text-lg text-gray-500 hover:text-black cursor-pointer transition-all duration-600">
+                OurTwitter &#8599;
+              </div>
+            </a>
+            <a href="https://discord.gg/MMcdP9fFmC" target="blank">
+              <div className="text-lg text-gray-500 hover:text-black cursor-pointer transition-all duration-600">
+                Our Discord &#8599;
+              </div>
+            </a>
+            <a
+              href="https://github.com/Deflated-Pappadam/project-haven"
+              target="blank"
+            >
+              <div className="text-lg text-gray-500 hover:text-black cursor-pointer transition-all duration-600">
+                Github &#8599;
+              </div>
+            </a>
+          </div>
+          <div className="mt-10">
+            <div className="text-xl text-black font-semibold">Links</div>
+
+            <div
+              className="text-lg text-gray-500 hover:text-black cursor-pointer transition-all duration-600"
+              onClick={() => {
+                handleScroll(homeRef);
+              }}
+            >
+              Home
+            </div>
+            <div
+              className="text-lg text-gray-500 hover:text-black cursor-pointer transition-all duration-600"
+              onClick={() => {
+                handleScroll(goalRef);
+              }}
+            >
+              Info
+            </div>
+            <div
+              className="text-lg text-gray-500 hover:text-black cursor-pointer transition-all duration-600"
+              onClick={() => {
+                handleScroll(aboutUsRef);
+              }}
+            >
+              About us
+            </div>
+            <div
+              className="text-lg text-gray-500 hover:text-black cursor-pointer transition-all duration-600"
+              onClick={() => {
+                handleScroll(collectionRef);
+              }}
+            >
+              Collections
+            </div>
+          </div>
+        </div>
+      
+      </footer>
     </div>
   );
 }
+
+

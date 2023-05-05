@@ -101,17 +101,20 @@ export default function Contribute() {
       )}
 
       <div className="relative h-full w-full flex flex-col items-center justify-center">
-        <div className="h-full w-full z-10 bg-black"> </div>
-        <div className="h-full w-full z-20 bg-white"> </div>
+        <div className="h-[60%] w-full -z-10 bg-black"> </div>
+        <div className="h-[40%] w-full z-20 bg-white"> </div>
         <div className="absolute z-10  h-[400px] w-[400px] blur-3xl rounded-full bg-gradient-to-r from-[#C7FD90] to-[#a810b95e]"> </div>
       {!showThankyouMsg ? (
         <div className="absolute z-30 flex flex-col justify-center items-center">
-            <h1 className="text-white text-6xl">The right price for you, whoever you are</h1>
-            <h2 className="text-gray-300">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit numquam eligendi quos odit doloribus molestiae voluptatum.</h2>
+          <div className="text-center w-[700px] mb-10">
+            <h1 className="text-white text-xl lg:text-6xl md:text-3xl">Welcome to the Haven Initiative</h1>
+            <h2 className="text-gray-300 text-md lg:text-xl md:text-lg">With every donation, you earn a NFT.It could be a base,golden or even a legendary card.Good luck!</h2>
+          </div>
             <div className="shadow-lg w-[300px] bg-white text-black rounded-lg p-5">
               <h2 className="font-semibold">Currency</h2>
               <div className="flex gap-1 bg-slate-100 p-1 rounded-md">
                 <Image alt="matic" src={maticLogo} height={15} width={15} />
+                
                 <p>Matic &#40;MATIC&#41;</p>
               </div>
               <h2 className="font-semibold">Amount</h2>
@@ -140,29 +143,33 @@ export default function Contribute() {
                 </div>
               </div>
               {!isConnected ? (
-                <div className="w-full justify-end items-end">
+                <div className="w-full mt-5 flex items-center justify-center">
                   <button
                     onClick={connectAccount}
-                    className="p-2  bg-[#C7FD90] text-white font-semibold rounded-lg drop-shadow-[0px_0px_0px_rgb(0,0,0)] mt-4 hover:shadow-none shadow-[6px_6px_0px_rgb(0,0,0)]  hover:translate-y-0 -translate-y-1 hover:translate-x-0 -translate-x-1 transition-all "
+                    className="p-2 bg-[#61bb07] rounded-md text-white font-semibold"
                   >
                     Connect Wallet
                   </button>
                 </div>
               ) : (
-                <div className="w-full justify-end items-end">
+                <div className="w-full mt-5 flex items-center justify-center">
                   <button
                     onClick={mintNFT}
-                    className="p-2 bg-[#C7FD90] text-white font-semibold rounded-lg drop-shadow-[0px_0px_0px_rgb(0,0,0)] mt-4 hover:shadow-none shadow-[6px_6px_0px_rgb(0,0,0)]  hover:translate-y-0 -translate-y-1 hover:translate-x-0 -translate-x-1 transition-all "
+                    className="p-2 bg-[#61bb07] text-white font-semibold rounded-lg mt-4"
                   >
                     Donate
                   </button>
                 </div>
               )}
             </div>
+            {/* <div className="border-gray-100 text-black shadow-lg border-2 rounded-md mt-10 p-5">
+              <h1 className="font-bold">Some Heading</h1>
+              <p>Dolor dolores repudiandae doloribus. Rerum sunt aut eum. Odit omnis non voluptatem sunt eos nostrum.</p>
+          </div> */}
         </div>
 
         ) : (
-          <div className="bg-white z-40 w-4/12 mt-[10%] text-black rounded-lg p-5">
+          <div className="bg-white absolute z-40 w-4/12 mt-[10%] shadow-xl text-black rounded-lg p-5">
             <h2 className="font-bold text-5xl mb-4 text-[#C7FD90]">
               Thank You! 🎉
             </h2>
