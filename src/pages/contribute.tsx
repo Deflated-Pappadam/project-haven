@@ -37,7 +37,7 @@ export default function Contribute() {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const contractAddress = "0xc83E8f083BB3B0c070556A79BD043cE756D1934b";
+  const contractAddress = "0x9A154B3198Afbc4f88D86BfEA788D719842F02bc";
 
   const onAmountChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = !Number.isNaN(e.target.valueAsNumber)
@@ -93,8 +93,8 @@ export default function Contribute() {
   return (
     <div className="relative h-screen m-auto overflow-hidden">
       {isProcessing && (
-        <div className="w-full h-full absolute z-20 bg-white flex justify-center items-center">
-          <h1 className="text-4xl font-bold text-[#C7FD90] ">
+        <div className="w-full h-full absolute z-50 bg-white flex justify-center items-center">
+          <h1 className="text-4xl font-bold text-[#57a00d] ">
             Your transaction is being processed
           </h1>
         </div>
@@ -103,7 +103,7 @@ export default function Contribute() {
       <div className="relative h-full w-full flex flex-col items-center justify-center">
         <div className="h-[60%] w-full -z-10 bg-black"> </div>
         <div className="h-[40%] w-full z-20 bg-white"> </div>
-        <div className="absolute z-10  h-[400px] w-[400px] blur-3xl rounded-full bg-gradient-to-r from-[#C7FD90] to-[#a810b95e]"> </div>
+        <div className="absolute z-10  h-[400px] w-[400px] blur-3xl rounded-full bg-gradient-to-r from-[#57a00d] to-[#a810b95e]"> </div>
       {!showThankyouMsg ? (
         <div className="absolute z-30 flex flex-col justify-center items-center">
           <div className="text-center w-[700px] mb-10">
@@ -146,7 +146,7 @@ export default function Contribute() {
                 <div className="w-full mt-5 flex items-center justify-center">
                   <button
                     onClick={connectAccount}
-                    className="p-2 bg-[#61bb07] rounded-md text-white font-semibold"
+                    className="p-2 bg-[#57a00d] rounded-md text-white font-semibold"
                   >
                     Connect Wallet
                   </button>
@@ -155,7 +155,7 @@ export default function Contribute() {
                 <div className="w-full mt-5 flex items-center justify-center">
                   <button
                     onClick={mintNFT}
-                    className="p-2 bg-[#61bb07] text-white font-semibold rounded-lg mt-4"
+                    className="p-2 bg-[#57a00d] text-white font-semibold rounded-lg mt-4"
                   >
                     Donate
                   </button>
@@ -170,7 +170,7 @@ export default function Contribute() {
 
         ) : (
           <div className="bg-white absolute z-40 w-4/12 mt-[10%] shadow-xl text-black rounded-lg p-5">
-            <h2 className="font-bold text-5xl mb-4 text-[#C7FD90]">
+            <h2 className="font-bold text-5xl mb-4 text-[#57a00d]">
               Thank You! 🎉
             </h2>
             <p>
@@ -185,7 +185,7 @@ export default function Contribute() {
             <p>
               Head over to{" "}
               <a
-                className="text-[#C7FD90] underline font-bold"
+                className="text-[#57a00d] underline font-bold"
                 href="https://testnets.opensea.io/collection/tmmc?search[sortAscending]=false&search[sortBy]=CREATED_DATE"
               >
                 OpenSea.io
@@ -194,7 +194,7 @@ export default function Contribute() {
             </p>
             <button
               onClick={() => setshowThankyouMsg(false)}
-              className="p-1 px-4 mt-5 border-4 rounded-lg font-semibold text-[#C7FD90] border-[#C7FD90] hover:bg-[#C7FD90] hover:text-white"
+              className="p-1 px-4 mt-5 border-4 rounded-lg font-semibold text-[#57a00d] border-[#57a00d] hover:bg-[#57a00d] hover:text-white"
             >
               Back
             </button>
