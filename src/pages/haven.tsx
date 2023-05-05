@@ -1,6 +1,5 @@
 import React from "react";
 import Footer from "@/components/footer";
-import Testimonial from "@/components/testimonial";
 import Img64 from "../assets/images/64.png";
 import Image from "next/image";
 import twitter from "../assets/twitter.svg";
@@ -9,6 +8,7 @@ import github from "../assets/github.svg";
 import { Doughnut } from "react-chartjs-2";
 import { useEffect, useState, useRef } from "react";
 import logo from "../assets/logo.png";
+import Link from "next/link";
 
 const data = {
   labels: ["Red", "Green", "Blue"],
@@ -65,7 +65,7 @@ function Haven() {
             </a>
           </div>
           <div>
-            <a href="/contibute">
+            <a href="/contribute">
               <button className="text-white font-medium border-black border-2 px-10 py-4 rounded-3xl text-lg bg-black">
                 Contribute
               </button>
@@ -84,7 +84,7 @@ function Haven() {
                 specific demographics, ranging from highschool students to
                 whatnot. It is essentially an ecosystem/body that comprise of
                 individuals who are well aware of how the different aspects of
-                one's mental state can potentially affect every known
+                one&#39;s mental state can potentially affect every known
                 individual. Often individuals, especially students who are
                 either left depressed or unmotivated are subjected to counseling
                 against their will, under the supervision of a{" "}
@@ -170,11 +170,11 @@ function Haven() {
             <div className="m-4 text-2xl text-gray-500">
               Feel free to hit us up with suggestions
             </div>
-            <a href="/contribute">
+            <Link href="/contribute">
               <button className=" m-4 text-black font-medium my-10 px-4 py-2 rounded-3xl text-lg bg-white hover:bg-black hover:text-white transition-all duration-1000">
                 Contribute -&gt;
               </button>
-            </a>
+            </Link>
           </div>
           <div className="mt-10">
             <div className="text-xl text-black font-semibold">Contact Us</div>

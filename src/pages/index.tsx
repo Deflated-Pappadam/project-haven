@@ -15,6 +15,7 @@ import twitter from "../assets/twitter.svg";
 import discord from "../assets/discord.svg";
 import github from "../assets/github.svg";
 import NftBox from "@/components/nftbox";
+import Link from "next/link";
 
 
 export default function Home() {
@@ -99,16 +100,16 @@ export default function Home() {
             </a>
           </div>
           <div>
-            <a href="/contribute">
+            <Link href="/contribute">
               <button className="text-white font-medium border-black border-2 px-10 py-4 rounded-3xl text-lg bg-black">
                 Contribute
               </button>
-            </a>
+            </Link>
           </div>
         </nav>
         <div ref={homeRef} className="absolute h-full w-full text-white top-0 flex justify-between">
           <div className="flex flex-col px-8 pb-20 w-[50%] justify-end">
-            <h1 className="text-8xl font-semibold">Guess what? <br></br><span className="text-8xl font-normal">it's never too late</span> </h1>
+            <h1 className="text-8xl font-semibold">Guess what? <br></br><span className="text-8xl font-normal">it&#39;s never too late</span> </h1>
            
             <hr className="h-[3px] bg-white my-7" />
             <p className="text-xl"> The Haven initiative is our answer to a millenia old fundraising
@@ -169,7 +170,7 @@ export default function Home() {
                 </h1>
                 <p className="font-semibold">
                   10% of the transaction charges of the NFTs belonging to the{" "}
-                  <b>Mind Matter's Collection</b> is claimed by Project Haven,
+                  <b>Mind Matter&#39;s Collection</b> is claimed by Project Haven,
                   which paves way for a donation cycle, instead of a path
                 </p>
               </div>
@@ -183,11 +184,11 @@ export default function Home() {
           <h1 className="text-black font-bold text-6xl">
             The Haven Initiative
           </h1>
-          <a href="/contribute">
+          <Link href="/contribute">
             <button className="text-black font-medium my-10 px-4 py-2 rounded-3xl text-lg bg-gray-300 hover:bg-black hover:text-white transition-all duration-300">
               Contribute
             </button>
-          </a>
+          </Link>
         </div>
         <hr className="h-5 border-gray-400 my-3 bg-transparent  border-t-2" />
         <div className="flex h-full py-28">
@@ -202,11 +203,11 @@ export default function Home() {
               importance of being the helpful hand when someone is subjected to
               immense mental stress or issues that affect their well-being
             </p>
-            <a href="/haven">
+            <Link href="/haven">
               <button className="text-black font-medium my-10 px-4 py-2 rounded-3xl text-lg bg-gray-300 hover:bg-black hover:text-white transition-all duration-300">
                 Learn more about Project Haven
               </button>
-            </a>
+            </Link>
           </div>
 
           <div className="flex w-[100%] items-center text-black flex-col justify-center ">
@@ -244,7 +245,7 @@ export default function Home() {
           03 - Our Collection
         </p>
         <h1 className="font-bold text-6xl mb-6">
-          The Mind Matter's Collection
+          The Mind Matter&#39;s Collection
         </h1>
         <div className=" flex m-auto w-full justify-center items-center flex-wrap">
           <NftBox name="Imagined Inlet" img={img2} rarity="Basic" />
@@ -277,11 +278,11 @@ export default function Home() {
             <div className="m-4 text-2xl text-gray-500">
               Feel free to hit us up with suggestions
             </div>
-            <a href="/contribute">
+            <Link href="/contribute">
               <button className=" m-4 text-black font-medium my-10 px-4 py-2 rounded-3xl text-lg bg-white hover:bg-black hover:text-white transition-all duration-1000">
                 Contribute -&gt;
               </button>
-            </a>
+            </Link>
           </div>
           <div className="mt-10">
             <div className="text-xl text-black font-semibold">Contact Us</div>
