@@ -17,10 +17,9 @@ import github from "../assets/github.svg";
 import NftBox from "@/components/nftbox";
 import Link from "next/link";
 
-
 export default function Home() {
   const [donations, setDonations] = useState<any[] | null>([]);
-  const [totalDonations ,setTotalDonations] = useState(1);
+  const [totalDonations, setTotalDonations] = useState(1);
   const homeRef = useRef<any>(null);
   const aboutUsRef = useRef<any>(null);
   const goalRef = useRef<any>(null);
@@ -28,13 +27,13 @@ export default function Home() {
   const contactUsRef = useRef<any>(null);
 
   const fetchDonations = async () => {
-      await getDocs(collection(db, "donations")).then((querySnapshot) => {
+    await getDocs(collection(db, "donations")).then((querySnapshot) => {
       const newData = querySnapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
       }));
       setDonations(newData);
-      setTotalDonations(newData.length)
+      setTotalDonations(newData.length);
       return newData;
     });
   };
@@ -51,9 +50,9 @@ export default function Home() {
       await fetchDonations();
     })();
   }, []);
-  
+
   return (
-    <div  className="w-screen h-full flex flex-col">
+    <div className="w-screen h-full flex flex-col">
       <div className="h-screen relative m-5 bg-gradient-to-br from-[#7E83BD] to-blue-100 rounded-3xl">
         <nav id="nav" className=" flex text-black justify-between p-4">
           <div className="flex items-center">
@@ -110,22 +109,31 @@ export default function Home() {
             </Link>
           </div>
         </nav>
-        <div ref={homeRef} className="absolute h-full w-full text-white top-0 flex justify-between">
+        <div
+          ref={homeRef}
+          className="absolute h-full w-full text-white top-0 flex justify-between"
+        >
           <div className="flex flex-col px-8 pb-20 w-[50%] justify-end">
-            <h1 className="text-8xl font-semibold">Guess what? <br></br><span className="text-8xl font-normal">it&#39;s never too late</span> </h1>
-           
+            <h1 className="text-8xl font-semibold">
+              Guess what? <br></br>
+              <span className="text-8xl font-normal">
+                it&#39;s never too late
+              </span>{" "}
+            </h1>
+
             <hr className="h-[3px] bg-white my-7" />
-            <p className="text-xl"> The Haven initiative is our answer to a millenia old fundraising
-                system that is still in practice. Our project is specifically
-                aimed at providing sustence and consistency to organzations who
-                strive towards the goal of attaining complete mental health
-                awarness and well being.</p>
+            <p className="text-xl">
+              {" "}
+              The Haven initiative is our answer to a millenia old fundraising
+              system that is still in practice. Our project is specifically
+              aimed at providing sustence and consistency to organzations who
+              strive towards the goal of attaining complete mental health
+              awarness and well being.
+            </p>
           </div>
           <div className="flex items-center  justify-center w-[40%] h-full ">
             <Image src={img8} alt="" className="rounded-lg w-[60%]" />
           </div>
-
-
         </div>
       </div>
       <Marquee
@@ -136,9 +144,10 @@ export default function Home() {
         Multi-ended donations | Sustainable development model |
       </Marquee>
       <section className="p-10 h-min-[900px]  flex flex-col text-black justify-between">
-        
         <div>
-        <p className="text-gray-600 font-semibold text-lg py-10">01 - General Info</p>
+          <p className="text-gray-600 font-semibold text-lg py-10">
+            01 - General Info
+          </p>
           <h1 className="text-gray-600 text-4xl">
             <b>Haven initiative</b> is the highly advanced fundraiser medium of{" "}
             <b>Project Haven</b>
@@ -173,8 +182,8 @@ export default function Home() {
                 </h1>
                 <p className="font-semibold">
                   10% of the transaction charges of the NFTs belonging to the{" "}
-                  <b>Mind Matter&#39;s Collection</b> is claimed by Project Haven,
-                  which paves way for a donation cycle, instead of a path
+                  <b>Mind Matter&#39;s Collection</b> is claimed by Project
+                  Haven, which paves way for a donation cycle, instead of a path
                 </p>
               </div>
             </div>
@@ -182,7 +191,7 @@ export default function Home() {
         </div>
       </section>
       <section ref={aboutUsRef} className="p-10 h-min-[700px] ">
-      <p className="text-gray-600 font-semibold text-lg">02 - About Us</p>
+        <p className="text-gray-600 font-semibold text-lg">02 - About Us</p>
         <div className="flex items-center justify-between">
           <h1 className="text-black font-bold text-6xl">
             The Haven Initiative
@@ -204,7 +213,9 @@ export default function Home() {
               and royalty charge system. <b>Project Haven</b> is an initiative
               put together by like minded individuals to propogate the
               importance of being the helpful hand when someone is subjected to
-              immense mental stress or issues that affect their well-being
+              immense mental stress or issues that affect their well-being. NFTs
+              follow the "manifestations of human minds" theme and has been
+              deployed in OpenSea
             </p>
             <Link href="/haven">
               <button className="text-black font-medium my-10 px-4 py-2 rounded-3xl text-lg bg-gray-300 hover:bg-black hover:text-white transition-all duration-300">
@@ -216,15 +227,16 @@ export default function Home() {
           <div className="flex w-[100%] items-center text-black flex-col justify-center ">
             <h1 className="font-bold text-6xl">Our Goal</h1>
             <section className="w-[400px]">
-
               <div className="w-full shadow-[0px_0px_3px_rgb(0,0,0)] h-6 m-2 bg-gray-200 rounded-full mt-7">
                 <div
-                  className={"h-6 bg-[#8adb37] rounded-full transition-all ease-in-out duration-100"}
-                  style={{width:`${totalDonations}%`}} 
+                  className={
+                    "h-6 bg-[#8adb37] rounded-full transition-all ease-in-out duration-100"
+                  }
+                  style={{ width: `${totalDonations}%` }}
                 ></div>
               </div>
 
-              <div className="flex justify-between"> 
+              <div className="flex justify-between">
                 <p>
                   raised{" "}
                   <span className="font-bold">
@@ -271,7 +283,10 @@ export default function Home() {
       </section>
 
       {/* FOOTER */}
-      <footer ref={contactUsRef} className="w-full min-h-[300px] -mt-5 bg-[#C9D0D5] p-10">
+      <footer
+        ref={contactUsRef}
+        className="w-full min-h-[300px] -mt-5 bg-[#C9D0D5] p-10"
+      >
         <div className="flex justify-between">
           <div>
             <div className="m-4 text-6xl text-black font-semibold">
@@ -361,10 +376,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      
       </footer>
     </div>
   );
 }
-
-
