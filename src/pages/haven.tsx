@@ -40,17 +40,17 @@ function Haven() {
   return (
     <div className=" w-full h-full m-0 p-0">
       <div ref={homeRef} className="mx-auto my-10 w-[95%] p-10 h-full bg-gradient-to-br from-[#7E83BD] to-blue-100  rounded-3xl">
-        <nav id="nav" className=" flex text-black justify-between">
+        <nav id="nav" className="flex text-black justify-between">
           <div className="flex">
             <Image src={logo} alt="" className="w-20" />
             <div className="text-[#C7FD90]  text-3xl my-auto">Haven</div>
           </div>
-          <div className="flex items-center justify-center text-md font-semibold bg-white px-10 rounded-full gap-10">
-            <a href="../" className="hover:animate-pulse">
+          <div className="z-50 flex items-center justify-center text-md font-semibold bg-white px-10 rounded-full gap-10">
+            <a href="../" className="hover:animate-pulse cursor-pointer">
               Home
             </a>
             <a
-              className="hover:animate-pulse"
+              className="hover:animate-pulse cursor-pointer"
               onClick={() => {
                 handleScroll(goalRef);
               }}
@@ -58,7 +58,7 @@ function Haven() {
               Goals
             </a>
             <a
-              className="hover:animate-pulse"
+              className="hover:animate-pulse cursor-pointer"
               onClick={() => {
                 handleScroll(contactUsRef);
               }}
@@ -66,9 +66,9 @@ function Haven() {
               Contact Us
             </a>
           </div>
-          <div>
-            <Link href="/contribute">
-              <button className="text-white font-medium border-black border-2 px-10 py-4 rounded-3xl text-lg bg-black">
+          <div className="z-50">
+            <Link  href="/contribute">
+              <button className="z-50 text-white font-medium border-black border-2 px-10 py-4 rounded-3xl text-lg bg-black cursor-pointer">
                 Contribute
               </button>
             </Link>
@@ -94,7 +94,7 @@ function Haven() {
                 could leave them scarred for the rest of their life.
               </p>
             </div>
-            <div className=" w-[70%] scale-150 flex items-center justify-center">
+            <div className="-z-0 w-[70%] scale-150 flex items-center justify-center">
               <Image src={inner} alt="" className="relative  animate-[spin_8000ms_infinite]"/>
               <Image src={outer} alt="" className="absolute animate-[spin_5000ms_backwards_infinite]"/>
             </div>

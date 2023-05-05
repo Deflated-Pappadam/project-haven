@@ -307,7 +307,7 @@ export default function Home() {
             </div>
             <a href="https://twitter.com/b21cs124544706" target="blank">
               <div className="text-lg text-gray-500 hover:text-black cursor-pointer transition-all duration-600">
-                OurTwitter &#8599;
+                Our Twitter &#8599;
               </div>
             </a>
             <a href="https://discord.gg/MMcdP9fFmC" target="blank">
