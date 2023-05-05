@@ -99,9 +99,9 @@ export default function Home() {
               Contact Us
             </a>
           </div>
-          <div>
+          <div className="z-40">
             <Link href="/contribute">
-              <button className="text-white font-medium border-black border-2 px-10 py-4 rounded-3xl text-lg bg-black">
+              <button className="text-white font-medium border-black border-2 px-10 py-4 rounded-3xl text-lg bg-black cursor-pointer">
                 Contribute
               </button>
             </Link>
