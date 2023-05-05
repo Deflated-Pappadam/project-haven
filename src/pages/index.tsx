@@ -216,9 +216,10 @@ export default function Home() {
           <div className="flex w-[100%] items-center text-black flex-col justify-center ">
             <h1 className="font-bold text-6xl">Our Goal</h1>
             <section className="w-[400px]">
+
               <div className="w-full shadow-[0px_0px_3px_rgb(0,0,0)] h-6 m-2 bg-gray-200 rounded-full mt-7">
                 <div
-                  className={`h-6 bg-[#8adb37] rounded-full w-[${totalDonations}%] transition-all ease-in-out duration-100`}
+                  className={"h-6 bg-[#8adb37] rounded-full max-w-[11%] transition-all ease-in-out duration-100"}
                 ></div>
               </div>
 
