@@ -19,7 +19,8 @@ import Link from "next/link";
 
 
 export default function Home() {
-  const [donations, setDonations] = useState<any[] | null>(null);
+  const [donations, setDonations] = useState<any[] | null>([]);
+  const [totalDonations ,setTotalDonations] = useState(1);
   const homeRef = useRef<any>(null);
   const aboutUsRef = useRef<any>(null);
   const goalRef = useRef<any>(null);
@@ -27,12 +28,14 @@ export default function Home() {
   const contactUsRef = useRef<any>(null);
 
   const fetchDonations = async () => {
-    await getDocs(collection(db, "donations")).then((querySnapshot) => {
+      await getDocs(collection(db, "donations")).then((querySnapshot) => {
       const newData = querySnapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
       }));
       setDonations(newData);
+      setTotalDonations(newData.length)
+      return newData;
     });
   };
 
@@ -45,7 +48,7 @@ export default function Home() {
 
   useEffect(() => {
     (async () => {
-      fetchDonations();
+      await fetchDonations();
     })();
   }, []);
   
@@ -215,11 +218,11 @@ export default function Home() {
             <section className="w-[400px]">
               <div className="w-full shadow-[0px_0px_3px_rgb(0,0,0)] h-6 m-2 bg-gray-200 rounded-full mt-7">
                 <div
-                  className={`h-6 bg-[#8adb37] rounded-full w-[${donations?.length!}%]`}
+                  className={`h-6 bg-[#8adb37] rounded-full w-[${totalDonations}%] transition-all ease-in-out duration-100`}
                 ></div>
               </div>
 
-              <div className="flex justify-between">
+              <div className="flex justify-between"> 
                 <p>
                   raised{" "}
                   <span className="font-bold">
