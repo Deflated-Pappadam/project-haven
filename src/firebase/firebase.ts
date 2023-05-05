@@ -13,8 +13,6 @@ const config = {
     appId: process.env.NEXT_PUBLIC_FIREBASE_APPID,
 };
 
-console.log(config);
-
 const app = initializeApp(config);
 // Initialize Cloud Firestore and get a reference to the service
 export const db = getFirestore(app);
