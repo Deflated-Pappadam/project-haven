@@ -214,7 +214,7 @@ export default function Home() {
               put together by like minded individuals to propogate the
               importance of being the helpful hand when someone is subjected to
               immense mental stress or issues that affect their well-being. NFTs
-              follow the "manifestations of human minds" theme and has been
+              follow the &ldquo;manifestations of human minds&rdquo; theme and has been
               deployed in OpenSea 
             </p>
             <Link href="/haven">
