@@ -215,7 +215,7 @@ export default function Home() {
               importance of being the helpful hand when someone is subjected to
               immense mental stress or issues that affect their well-being. NFTs
               follow the "manifestations of human minds" theme and has been
-              deployed in OpenSea
+              deployed in OpenSea 
             </p>
             <Link href="/haven">
               <button className="text-black font-medium my-10 px-4 py-2 rounded-3xl text-lg bg-gray-300 hover:bg-black hover:text-white transition-all duration-300">
